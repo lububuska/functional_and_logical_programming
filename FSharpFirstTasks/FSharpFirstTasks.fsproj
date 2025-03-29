@@ -6,8 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="CircleCylinder.fs" />
-    <Compile Include="main.fs" />
+    <Compile Include="sumOfDigits.fs" />
   </ItemGroup>
 
 </Project>
