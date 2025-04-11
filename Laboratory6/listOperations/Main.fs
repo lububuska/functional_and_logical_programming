@@ -43,4 +43,22 @@ let main argv =
 
     printfn "Циклический сдвиг на 1 влево (Списки Чёрча): %A" resultShiftLeftOneChurch
 
+    // 14 задание
+
+    let list4 = [5; 3; 8; 1; 4]
+
+    printfn "Оригинальный список: %A" list4
+
+    let indicesList, countOfIndicesList = amountLessLeftElementList list4
+
+    printfn "Индексы элементов, которые меньше своего левого соседа: %A" indicesList
+
+    printfn "Количество элементов, которые меньше своего левого соседа: %A" countOfIndicesList
+
+    let indicesChurch, countOfIndicesChurch = amountLessLeftElementChurch list4
+
+    printfn "Индексы элементов, которые меньше своего левого соседа: %A" indicesChurch
+
+    printfn "Количество элементов, которые меньше своего левого соседа: %A" countOfIndicesChurch
+
     0

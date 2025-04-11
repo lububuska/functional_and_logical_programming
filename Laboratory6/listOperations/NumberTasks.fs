@@ -105,3 +105,23 @@ let rec shiftLeftOneChurch list =
             | [] -> list
             | head :: tail -> tail @ [head]
         shift list
+
+// 1.37 Дан целочисленный массив. Вывести индексы элементов, которые меньше своего левого соседа, и количество таких чисел.
+
+let amountLessLeftElementList list =
+    let indices = 
+        list |> List.mapi (fun i x -> (i, x)) |> List.skip 1 |> List.filter (fun (i, x) -> x < list.[i - 1]) |> List.map fst
+    indices, List.length indices
+
+let amountLessLeftElementChurch list =
+    let rec loop left currentIndex tailItems accIndices accCount =
+        match tailItems with
+        | [] -> (accIndices, accCount)
+        | x :: xs ->
+            match x < left with
+            | true -> loop x (currentIndex + 1) xs (currentIndex :: accIndices) (accCount + 1)
+            | false -> loop x (currentIndex + 1) xs accIndices accCount
+    match list with
+    | [] | [_] -> ([], 0)
+    | head :: tail -> loop head 1 tail [] 0
+          
