@@ -26,3 +26,58 @@ let rec shiftRightTwoChurch list =
             | _ :: tail when listLength 0 list = 2 -> list @ acc
             | head :: tail -> shift (acc @ [head]) tail
         shift [] list
+
+// 1.17 Дан целочисленный массив. Необходимо поменять местами минимальный и максимальный элементы массива.
+
+let rec replaceMaxAndMinList list =
+    match list with
+    | [] -> []
+    | _ ->
+        let couples = List.mapi (fun i x -> (i, x)) list
+        let minIndex, minValue = List.minBy snd couples
+        let maxIndex, maxValue = List.maxBy snd couples
+
+        list
+        |> List.mapi (fun i x ->
+            if i = minIndex then maxValue
+            elif i = maxIndex then minValue
+            else x
+        )
+
+let replaceMaxAndMinChurch list = 
+    let rec MIN tailItems currentIndex minValue minIndex =
+        match tailItems with
+        | [] -> (minIndex, minValue)
+        | x :: rest ->
+            if x < minValue then
+                MIN rest (currentIndex + 1) x currentIndex
+            else
+                MIN rest (currentIndex + 1) minValue minIndex
+
+    let rec MAX tailItems currentIndex maxValue maxIndex =
+        match tailItems with
+        | [] -> (maxIndex, maxValue)
+        | x :: rest ->
+            if x > maxValue then
+                MAX rest (currentIndex + 1) x currentIndex
+            else
+                MAX rest (currentIndex + 1) maxValue maxIndex
+                
+    let replaceItems list minIdx maxIdx minVal maxVal =
+        let rec loop remaining index acc =
+            match remaining with
+            | [] -> acc
+            | x :: xs ->
+                let newValue =
+                    if index = minIdx then maxVal
+                    elif index = maxIdx then minVal
+                    else x
+                loop xs (index + 1) (acc @ [newValue])
+        loop list 0 []
+
+    match list with
+    | [] -> failwith "Пустой список"
+    | x :: tail -> 
+        let (minIdx, minVal) = MIN tail 1 x 0
+        let (maxIdx, maxVal) = MAX tail 1 x 0
+        replaceItems list minIdx maxIdx minVal maxVal
