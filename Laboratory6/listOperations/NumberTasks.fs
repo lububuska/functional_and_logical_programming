@@ -81,3 +81,27 @@ let replaceMaxAndMinChurch list =
         let (minIdx, minVal) = MIN tail 1 x 0
         let (maxIdx, maxVal) = MAX tail 1 x 0
         replaceItems list minIdx maxIdx minVal maxVal
+
+// 1.27 Дан целочисленный массив. Необходимо осуществить циклический сдвиг элементов массива влево на одну позицию.
+
+let rec shiftLeftOneList list = 
+    let n = List.length list                
+    if n <= 1 then list                      
+    else
+        let tail = List.tail list   
+        let head = List.head list  
+        tail @ [head]
+
+let rec shiftLeftOneChurch list =
+    let rec listLength acc list =
+        match list with
+        | [] -> acc
+        | head :: tail -> listLength (acc + 1) tail
+    let length = listLength 0 list
+    if length <= 1 then list
+    else
+        let shift list =
+            match list with
+            | [] -> list
+            | head :: tail -> tail @ [head]
+        shift list

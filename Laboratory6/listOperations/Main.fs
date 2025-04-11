@@ -29,4 +29,18 @@ let main argv =
 
     printfn "Смена минимального и максимального элементов (Списки Чёрча): %A" result
 
+    // 13 задание
+
+    let list3 = [5; 3; 8; 1; 4]
+
+    printfn "Оригинальный список: %A" list3
+
+    let resultShiftLeftOneList = shiftLeftOneList list3
+
+    printfn "Циклический сдвиг на 1 влево (list): %A" resultShiftLeftOneList
+
+    let resultShiftLeftOneChurch = shiftLeftOneChurch list3
+
+    printfn "Циклический сдвиг на 1 влево (Списки Чёрча): %A" resultShiftLeftOneChurch
+
     0
