@@ -101,12 +101,28 @@ let main argv =
 
     printfn "Кол-во элементов, которые больше, чем сумма предыдущих (Списки Чёрча): %A" greaterThanPrevChurch
 
+    printfn "------------------------"
+
     // 19 задание
 
     let string1 = "jdksdjNjsdjUnskdnN"
 
+    printfn "Оригинальная строка: %A" string1
+
     let result = isUpperCasePalindrome string1
 
     printfn "Результат: %A" result
+
+    printfn "------------------------"
+
+    // 20 задание
+
+    let strings = ["abc"; "logic"; "abcd"; "hello"; "world"; "test"]
+
+    printfn "Оригинальная строка: %A" strings
+
+    let sortedStrings = sortStringsByDeviation strings
+
+    printfn "Отсортированные строки: %A" sortedStrings
 
     0
