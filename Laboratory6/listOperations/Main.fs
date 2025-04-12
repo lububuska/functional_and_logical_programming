@@ -1,5 +1,6 @@
 open System
 open NumberTasks
+open StringAnalisys
  
 [<EntryPoint>]
 let main argv =
@@ -99,5 +100,13 @@ let main argv =
     let greaterThanPrevChurch = countGreaterThanPrevSumChurch list6
 
     printfn "Кол-во элементов, которые больше, чем сумма предыдущих (Списки Чёрча): %A" greaterThanPrevChurch
+
+    // 19 задание
+
+    let string1 = "jdksdjNjsdjUnskdnN"
+
+    let result = isUpperCasePalindrome string1
+
+    printfn "Результат: %A" result
 
     0
