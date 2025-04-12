@@ -67,19 +67,19 @@ let replaceMaxAndMinChurch list =
         let rec loop remaining index acc =
             match remaining with
             | [] -> acc
-            | x :: xs ->
+            | head :: tail ->
                 let newValue =
                     if index = minIdx then maxVal
                     elif index = maxIdx then minVal
-                    else x
-                loop xs (index + 1) (acc @ [newValue])
+                    else head
+                loop tail (index + 1) (acc @ [newValue])
         loop list 0 []
 
     match list with
     | [] -> failwith "Пустой список"
-    | x :: tail -> 
-        let (minIdx, minVal) = MIN tail 1 x 0
-        let (maxIdx, maxVal) = MAX tail 1 x 0
+    | head :: tail -> 
+        let (minIdx, minVal) = MIN tail 1 head 0
+        let (maxIdx, maxVal) = MAX tail 1 head 0
         replaceItems list minIdx maxIdx minVal maxVal
 
 // 1.27 Дан целочисленный массив. Необходимо осуществить циклический сдвиг элементов массива влево на одну позицию.
@@ -117,10 +117,10 @@ let amountLessLeftElementChurch list =
     let rec loop left currentIndex tailItems accIndices accCount =
         match tailItems with
         | [] -> (accIndices, accCount)
-        | x :: xs ->
-            match x < left with
-            | true -> loop x (currentIndex + 1) xs (currentIndex :: accIndices) (accCount + 1)
-            | false -> loop x (currentIndex + 1) xs accIndices accCount
+        | head :: tail ->
+            match head < left with
+            | true -> loop head (currentIndex + 1) tail (currentIndex :: accIndices) (accCount + 1)
+            | false -> loop head (currentIndex + 1) tail accIndices accCount
     match list with
     | [] | [_] -> ([], 0)
     | head :: tail -> loop head 1 tail [] 0
@@ -149,18 +149,41 @@ let findDivisorsChurch list =
             let rec addUnique from toAcc =
                 match from with
                 | [] -> toAcc
-                | x :: xs ->
+                | head :: tail ->
                     let rec exists x lst =
                         match lst with
                         | [] -> false
-                        | y :: ys -> if x = y then true else exists x ys
-                    match exists x toAcc with
-                    | true -> addUnique xs toAcc
-                    | false -> addUnique xs (x :: toAcc)
+                        | y :: ys -> if head = y then true else exists head ys
+                    match exists head toAcc with
+                    | true -> addUnique tail toAcc
+                    | false -> addUnique tail (head :: toAcc)
 
             let divs = findDivs 1 head []
             let newAcc = addUnique divs acc
             process tail newAcc
 
     process list []
+
+// 1.57 Для введенного списка найти количество таких элементов, которые больше, чем сумма всех предыдущих.
+
+let countGreaterThanPrevSumList list =
+    let sumsBefore =
+        list |> List.scan (fun acc x -> acc + x) 0 |> List.take (List.length list)
+
+    let pairs = List.zip list sumsBefore
+
+    pairs |> List.filter (fun (x, sumBefore) -> x > sumBefore) |> List.length
+
+
+let countGreaterThanPrevSumChurch list =
+    let rec helper lst sum count =
+        match lst with
+        | [] -> count
+        | head :: tail ->
+            let newCount =
+                match head > sum with
+                | true -> count + 1
+                | false -> count
+            helper tail (sum + head) newCount
+    helper list 0 0
 
