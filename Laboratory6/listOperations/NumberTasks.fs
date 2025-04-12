@@ -124,4 +124,43 @@ let amountLessLeftElementChurch list =
     match list with
     | [] | [_] -> ([], 0)
     | head :: tail -> loop head 1 tail [] 0
-          
+
+// 1.47 Для введенного списка положительных чисел построить список всех положительных делителей элементов списка без повторений.
+
+let findDivisorsList list =
+    let divisors n =
+        [1 .. n] |> List.filter (fun x -> n % x = 0)
+
+    list |> List.collect divisors |> List.ofSeq |> List.distinct
+
+let findDivisorsChurch list =
+    let rec process input acc =
+        match input with
+        | [] -> acc
+        | head :: tail ->
+            let rec findDivs i max dacc =
+                match i > max with
+                | true -> dacc
+                | false ->
+                    match max % i = 0 with
+                    | true -> findDivs (i + 1) max (i :: dacc)
+                    | false -> findDivs (i + 1) max dacc
+
+            let rec addUnique from toAcc =
+                match from with
+                | [] -> toAcc
+                | x :: xs ->
+                    let rec exists x lst =
+                        match lst with
+                        | [] -> false
+                        | y :: ys -> if x = y then true else exists x ys
+                    match exists x toAcc with
+                    | true -> addUnique xs toAcc
+                    | false -> addUnique xs (x :: toAcc)
+
+            let divs = findDivs 1 head []
+            let newAcc = addUnique divs acc
+            process tail newAcc
+
+    process list []
+

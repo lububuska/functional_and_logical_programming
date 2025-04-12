@@ -51,14 +51,28 @@ let main argv =
 
     let indicesList, countOfIndicesList = amountLessLeftElementList list4
 
-    printfn "Индексы элементов, которые меньше своего левого соседа: %A" indicesList
+    printfn "Индексы элементов, которые меньше своего левого соседа (list): %A" indicesList
 
-    printfn "Количество элементов, которые меньше своего левого соседа: %A" countOfIndicesList
+    printfn "Количество элементов, которые меньше своего левого соседа (list): %A" countOfIndicesList
 
     let indicesChurch, countOfIndicesChurch = amountLessLeftElementChurch list4
 
-    printfn "Индексы элементов, которые меньше своего левого соседа: %A" indicesChurch
+    printfn "Индексы элементов, которые меньше своего левого соседа (Списки Чёрча): %A" indicesChurch
 
-    printfn "Количество элементов, которые меньше своего левого соседа: %A" countOfIndicesChurch
+    printfn "Количество элементов, которые меньше своего левого соседа (Списки Чёрча): %A" countOfIndicesChurch
+
+    // 15 задание
+
+    let list5 = [5; 3; 8; 1; 12]
+
+    printfn "Оригинальный список: %A" list5
+
+    let divisorsList = findDivisorsList list5
+
+    printfn "Положительные делители элементов списка (list): %A" divisorsList
+
+    let divisorsChurch = findDivisorsChurch list5
+
+    printfn "Положительные делители элементов списка (Списки Чёрча): %A" divisorsChurch
 
     0
