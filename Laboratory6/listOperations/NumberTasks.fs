@@ -4,16 +4,16 @@ module NumberTasks
 
 // 1.7	Дан целочисленный массив. Необходимо осуществить циклический сдвиг элементов массива вправо на две позиции.
 
-let rec shiftRightTwoList list = 
+let shiftRightTwoList list = 
     let n = List.length list                
     if n <= 2 then list                      
     else
-        let tail = List.skip (n - 2) list   
+        let tail = List.skip (n - 2) list   // 1 2 3 4 -> tail = [3, 4] head = [1, 2]
         let head = List.take (n - 2) list  
         tail @ head  
 
 
-let rec shiftRightTwoChurch list =
+let shiftRightTwoChurch list =
     let rec listLength acc list =
         match list with
         | [] -> acc
@@ -29,7 +29,7 @@ let rec shiftRightTwoChurch list =
 
 // 1.17 Дан целочисленный массив. Необходимо поменять местами минимальный и максимальный элементы массива.
 
-let rec replaceMaxAndMinList list =
+let replaceMaxAndMinList list =
     match list with
     | [] -> []
     | _ ->
@@ -84,7 +84,7 @@ let replaceMaxAndMinChurch list =
 
 // 1.27 Дан целочисленный массив. Необходимо осуществить циклический сдвиг элементов массива влево на одну позицию.
 
-let rec shiftLeftOneList list = 
+let shiftLeftOneList list = 
     let n = List.length list                
     if n <= 1 then list                      
     else
@@ -92,7 +92,7 @@ let rec shiftLeftOneList list =
         let head = List.head list  
         tail @ [head]
 
-let rec shiftLeftOneChurch list =
+let shiftLeftOneChurch list =
     let rec listLength acc list =
         match list with
         | [] -> acc
@@ -128,8 +128,7 @@ let amountLessLeftElementChurch list =
 // 1.47 Для введенного списка положительных чисел построить список всех положительных делителей элементов списка без повторений.
 
 let findDivisorsList list =
-    let divisors n =
-        [1 .. n] |> List.filter (fun x -> n % x = 0)
+    let divisors n = [1 .. n] |> List.filter (fun x -> n % x = 0)
 
     list |> List.collect divisors |> List.ofSeq |> List.distinct
 
@@ -167,8 +166,7 @@ let findDivisorsChurch list =
 // 1.57 Для введенного списка найти количество таких элементов, которые больше, чем сумма всех предыдущих.
 
 let countGreaterThanPrevSumList list =
-    let sumsBefore =
-        list |> List.scan (fun acc x -> acc + x) 0 |> List.take (List.length list)
+    let sumsBefore = list |> List.scan (fun acc x -> acc + x) 0 |> List.take (List.length list)
 
     let pairs = List.zip list sumsBefore
 

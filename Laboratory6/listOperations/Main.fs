@@ -1,7 +1,8 @@
 open System
 open NumberTasks
 open StringAnalisys
- 
+open ClassList
+
 [<EntryPoint>]
 let main argv =
     // 11 задание
@@ -100,6 +101,17 @@ let main argv =
     let greaterThanPrevChurch = countGreaterThanPrevSumChurch list6
 
     printfn "Кол-во элементов, которые больше, чем сумма предыдущих (Списки Чёрча): %A" greaterThanPrevChurch
+
+    printfn "------------------------"
+
+    // 17 задание
+
+    let list = [12; 8; 15; 6; 10; 9]
+
+    printfn "Оригинальный список: %A" list
+
+    let sorted = sortByDivisorsParam list
+    printfn "Сортировка по параметру - сумме делителя числа: %A" sorted
 
     printfn "------------------------"
 
