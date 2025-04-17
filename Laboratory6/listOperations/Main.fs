@@ -2,6 +2,7 @@ open System
 open NumberTasks
 open StringAnalisys
 open ClassList
+open ClassMassive
 
 [<EntryPoint>]
 let main argv =
@@ -114,6 +115,17 @@ let main argv =
     printfn "Сортировка по параметру - сумме делителя числа: %A" sorted
 
     printfn "------------------------"
+
+    // 18 задание
+
+    Console.Write("Введите первый массив (цифры через пробел): ")
+    let aInput = Console.ReadLine().Split() |> Array.map int
+ 
+    Console.Write("Введите второй массив (цифры через пробел): ")
+    let bInput = Console.ReadLine().Split() |> Array.map int
+ 
+    let result = intersectionNonDecreasingArrays aInput bInput
+    printfn "Пересечение: %A" result
 
     // 19 задание
 

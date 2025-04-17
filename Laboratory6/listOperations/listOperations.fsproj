@@ -9,6 +9,7 @@
     <Compile Include="NumberTasks.fs" />
     <Compile Include="StringAnalisys.fs" />
     <Compile Include="ClassList.fs" />
+    <Compile Include="ClassMassive.fs" />
     <Compile Include="Main.fs" />
   </ItemGroup>
 
